@@ -1,0 +1,17 @@
+Server
+------------
+# Create Folder
+# Create File
+# Backend packages
+
+    - Cookie-perser
+    - Cors
+    - Express
+    - Express-rate-limit
+    - Express validator
+    - Helmet
+    - Hpp
+    - Jwt
+    - Mongoose
+    - Node mailer
+    - Nodemon
