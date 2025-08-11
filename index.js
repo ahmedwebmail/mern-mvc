@@ -13,8 +13,57 @@ const app = express()
  */
 
 app.get("/one", (req, res)=>{
-    res.end("This is get from page one")
+
+    let Person= [
+      {
+        "name": "Alice Johnson",
+        "city": "New York",
+        "occupation": "Software Engineer",
+        "email": "alice.johnson@example.com"
+      },
+      {
+        "name": "Brian Smith",
+        "city": "Los Angeles",
+        "occupation": "Graphic Designer",
+        "email": "brian.smith@example.com"
+      },
+      {
+        "name": "Catherine Lee",
+        "city": "Chicago",
+        "occupation": "Data Analyst",
+        "email": "catherine.lee@example.com"
+      },
+      {
+        "name": "David Martinez",
+        "city": "Houston",
+        "occupation": "Marketing Manager",
+        "email": "david.martinez@example.com"
+      },
+      {
+        "name": "Emily Davis",
+        "city": "Seattle",
+        "occupation": "UX Designer",
+        "email": "emily.davis@example.com"
+      }
+    ]
+    res.append("name", "Ahmed")
+    res.append("city", "Dhaka")
+
+    res.cookie("C1", "Cookie 1")
+    res.cookie("C2", "Cookie 2")
+    res.cookie("C3", "Cookie 3")
+    res.cookie("C4", "Cookie 4")
+
+    res.status(200).json(Person)
 });
+
+app.get("/download", (req, res)=>{
+    res.download("file.txt")
+})
+
+app.get("/redirect", (req, res)=>{
+    res.redirect("/one")
+})
 
 /**
  * Defining API endpoints for different HTTP methods using Express.
@@ -48,6 +97,10 @@ app.patch("/four", (req, res)=>{
  */
 app.delete("/five", (req, res)=>{
     res.end("This is page five from delete")
+});
+
+app.get("/five", (req, res)=>{
+
 });
 
 /**
