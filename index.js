@@ -8,8 +8,15 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res)=>{
+    res.cookie("cookie_01", "01")
+    res.cookie("cookie_02", "02")
+    res.cookie("cookie_03", "03")
+    res.cookie("cookie_04", "04")
+    res.cookie("cookie_05", "05")
 
-    res.end("This is index page")
+    res.header("header_01", "01")
+
+    res.end("this is simple string")
 })
 
 app.get('/one', (req, res)=>{
@@ -36,6 +43,16 @@ app.get('/custom-req', (req, res)=>{
 app.get('/clear-cookie', (req, res)=>{
     res.clearCookie("cookie_01")
     res.end("Cleared")
+})
+
+app.get('/verify-token', (req, res)=>{
+    let token = req.headers['token']
+    if(token === "abc123"){
+        res.end("Token verified")
+    }
+    else{
+        res.end("Invalid token")
+    }
 })
 
 app.listen(3000, ()=>{
