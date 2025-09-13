@@ -8,6 +8,11 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res)=>{
+
+    res.end("This is index page")
+})
+
+app.get('/one', (req, res)=>{
     res.cookie("cookie_01", "01")
     res.cookie("cookie_02", "02")
     res.cookie("cookie_03", "03")
