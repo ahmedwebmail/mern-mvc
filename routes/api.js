@@ -15,6 +15,10 @@ const router = express.Router();
 
 import * as CategoryController from "../app/controllers/CategoryController.js";
 import * as BrandController from "../app/controllers/BrandController.js";
+import * as CartListController from "../app/controllers/CartListController.js";
+import * as ProductController from "../app/controllers/ProductController.js";
+import * as InvoiceController from "../app/controllers/InvoiceController.js";
+import * as WishListController from "../app/controllers/WishListController.js";
 import * as SignupController from "../app/controllers/SignupController.js";
 import * as SigninController from "../app/controllers/SigninController.js";
 import * as UserController from "../app/controllers/UserController.js";
@@ -88,6 +92,7 @@ router.patch("/category-soft-delete/:id", CategoryController.softDelete);
 
 router.post("/signup", SignupController.signupUser);
 router.post("/signin", SigninController.signinUser);
+router.post("/verify-login", SigninController.verifyLogin);
 
 /**
  * ---------------------------------------------------------------------
@@ -103,8 +108,150 @@ router.post("/signin", SigninController.signinUser);
  * - These routes should be protected using authentication middleware.
  * ---------------------------------------------------------------------
  */
-// router.get("/view-prifile", "UserController.viewProfile");
-// router.put("/update-profile", "UserController.updateProfile");
+router.get("/view-profile", UserController.viewProfile);
+router.put("/update-profile/:id", UserController.updateProfile);
+router.post("/create-profile", UserController.createProfile);
+
+/**
+ * ---------------------------------------------------------
+ * Cart Management Routes
+ * ---------------------------------------------------------
+ * This section defines all RESTful API endpoints related to
+ * shopping cart operations.
+ *
+ * Responsibilities:
+ * - Add products to the user's cart
+ * - Retrieve all cart items
+ * - View details of a specific cart item
+ * - Update quantity or attributes of a cart item
+ * - Remove items from the cart
+ *
+ * Architecture:
+ * - Routes delegate business logic to CartListController
+ * - Controller handles validation, database interaction,
+ *   and response formatting
+ *
+ * HTTP Methods Used:
+ * - POST    : Create new cart entry
+ * - GET     : Read cart data
+ * - PUT     : Update existing cart item
+ * - DELETE  : Remove cart item
+ *
+ * URL Design:
+ * - Follows RESTful API conventions
+ * - Uses route parameters for cart item identification
+ *
+ * Security & Scalability:
+ * - Can be extended with authentication middleware
+ * - Designed for modular expansion (e.g., coupons, checkout)
+ * ---------------------------------------------------------
+ */
+router.post("/add-to-cart", CartListController.create);
+// router.get("/cart-list", CartListController.car);
+// router.get("/view-cart/:id", CartListController.show);
+// router.put("/update-cart/:id", CartListController.update);
+// router.delete("/remove-cart/:id", CartListController.remove);
+
+/**
+ * --------------------------------------------------------------------------
+ * Wishlist Management Routes
+ * --------------------------------------------------------------------------
+ * This section defines all RESTful API endpoints related to wishlist
+ * operations. These routes handle the complete lifecycle of a wishlist,
+ * including creation, retrieval, modification, and deletion.
+ *
+ * Responsibilities:
+ * - Fetch the user's wishlist data from the system
+ * - Create a new wishlist entry
+ * - Update an existing wishlist by its unique identifier
+ * - Remove a wishlist permanently from the database
+ *
+ * Design Notes:
+ * - Follows REST API best practices using appropriate HTTP methods
+ * - Business logic is delegated to the WishListController
+ * - Route parameters are used to uniquely identify wishlist resources
+ *
+ * Endpoints:
+ * - GET    /wish-list                 → Retrieve all wishlist items
+ * - POST   /create-wish-list          → Create a new wishlist
+ * - PUT    /update-wish-list/:id      → Update an existing wishlist by ID
+ * - DELETE /delete-wish-list/:id      → Delete a wishlist by ID
+ * --------------------------------------------------------------------------
+ */
+// router.get('/wish-list', WishListController.getWishList);
+// router.post('/create-wish-list', WishListController.createWishList);
+// router.put('/update-wish-list/:id', WishListController.updateWishList);
+// router.delete('/delete-wish-list/:id', WishListController.deleteWishList);
+
+/**
+ * ---------------------------------------------------------
+ * Product Management & Review Routes
+ * ---------------------------------------------------------
+ * This section defines all RESTful API endpoints related to
+ * product lifecycle management and user interactions.
+ *
+ * Functional Coverage:
+ * - Create, read, update, and delete (CRUD) operations
+ * - Soft deletion for reversible product removal
+ * - Product filtering based on category and brand
+ * - Product review creation and retrieval
+ *
+ * API Design Notes:
+ * - Uses HTTP methods according to REST standards
+ * - Route parameters are used for dynamic resource access
+ * - Separation of concerns is maintained via ProductController
+ *
+ * Controllers:
+ * - ProductController handles all business logic and data access
+ *
+ * Base Route:
+ * - /product
+ *
+ * Security & Scalability:
+ * - Can be extended with authentication, authorization,
+ *   validation middleware, and rate limiting
+ *
+ * ---------------------------------------------------------
+ */
+router.post("/add-product", ProductController.create);
+router.get("/product-list", ProductController.index);
+router.get("/view-product/:id", ProductController.show);
+router.put("/update-product/:id", ProductController.update);
+router.delete("/remove-product/:id", ProductController.remove);
+router.patch("/product-soft-delete/:id", ProductController.softDelete);
+// router.get('/product-by-category/:category_id', ProductController.getProductsByCategory);
+// router.get('/product-by-brand/:brand_id', ProductController.getProductsByBrand);
+// router.get('/product-by-review/:id', ProductController.getProductsByReview);
+// router.post("/create-product-review", ProductController.createProductReview);
+
+/**
+ * -------------------------------------------------------------
+ * Invoice Management Routes
+ * -------------------------------------------------------------
+ * This section defines all API endpoints related to invoice
+ * operations within the system.
+ *
+ * Routes included:
+ * 1. POST /create-invoice
+ *    - Creates a new invoice based on the request payload.
+ *    - Handles validation, business logic, and persistence.
+ *
+ * 2. GET /invoice-list
+ *    - Retrieves a list of all invoices.
+ *    - Can be extended to support pagination, filtering,
+ *      and sorting in the future.
+ *
+ * 3. GET /view-invoice/:id
+ *    - Fetches detailed information for a single invoice
+ *      using the invoice ID as a route parameter.
+ *
+ * All routes delegate request handling to the InvoiceController
+ * to maintain separation of concerns and cleaner routing logic.
+ * -------------------------------------------------------------
+ */
+// router.post("/create-invoice", InvoiceController.createInvoice);
+// router.get("/invoice-list", InvoiceController.invoiceList);
+// router.get("/view-invoice/:id", InvoiceController.showSingleInvoice);
 
 /**
  * ---------------------------------------------------------------------
