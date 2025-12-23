@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { fa, faker } from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import User from "../app/models/User.js";
 import Invoice from "../app/models/Invoice.js";
 
@@ -9,59 +9,58 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.nx8kf.mongodb.net/basarbazz
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.error(err));
 
-function fakeInvoice(userId) {
-  const total = faker.number.int({ min: 100, max: 5000 });
-  const vat = Math.round(total * 0.15);
+const paymentStatuses = ["Paid", "Unpaid", "Pending"];
+const deliveryStatuses = ["Pending", "Processing", "Delivered"];
+
+const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const randomNumber = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const generateInvoice = (userId) => {
+  const total = randomNumber(1000, 10000);
+  const vat = Math.floor(total * 0.15);
 
   return {
     user_id: userId,
-
     payable: total.toString(),
+    cus_details: "John Doe, London, UK",
+    ship_details: "Same as billing address",
+    tran_id: `TXN-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    val_id: `VAL-${Math.floor(Math.random() * 1000000)}`,
+    payment_status: randomItem(paymentStatuses),
+    delivery_status: randomItem(deliveryStatuses),
     total: total.toString(),
     vat: vat.toString(),
-
-    cus_details: `${faker.person.fullName()}, ${faker.location.streetAddress()}, ${faker.location.city()}`,
-    ship_details: `${faker.person.fullName()}, ${faker.location.streetAddress()}, ${faker.location.city()}`,
-
-    tran_id: faker.string.alphanumeric(12).toUpperCase(),
-    val_id: faker.string.alphanumeric(10).toUpperCase(),
-
-    payment_status: faker.helpers.arrayElement([
-      "pending",
-      "paid",
-      "failed",
-    ]),
-
-    delivery_status: faker.helpers.arrayElement([
-      "processing",
-      "shipped",
-      "delivered",
-    ]),
   };
-}
+};
 
-async function seedInvoices() {
-  const users = await User.find({}, { _id: 1 }).lean();
+const seedInvoices = async () => {
+  try {
+    console.log("Invoice seeding started...");
 
-  let invoices = [];
-  let total_invoices = 0;
+    // Optional: clear existing invoices
+    await Invoice.deleteMany();
 
-  for (const user of users) {
-    const invoice_count = faker.number.int({ min: 5, max: 20 });
+    const users = await User.find();
 
-    for (let i = 0; i < invoice_count; i++) {
-      if (total_invoices >= 200) break;
+    let invoices = [];
 
-      invoices.push(fakeInvoice(user._id));
-      total_invoices++;
-    }
+    users.forEach((user) => {
+      const invoiceCount = randomNumber(3, 6);
 
-    if (total_invoices >= 200) break;
+      for (let i = 0; i < invoiceCount; i++) {
+        invoices.push(generateInvoice(user._id));
+      }
+    });
+
+    await Invoice.insertMany(invoices);
+
+    console.log(`Seeded ${invoices.length} invoices successfully`);
+    process.exit();
+  } catch (error) {
+    console.error("Invoice seeding failed:", error.toString());
+    process.exit(1);
   }
+};
 
-  await Invoice.insertMany(invoices);
-  console.log(`✅ ${total_invoices} invoices created successfully`);
-}
-
-await seedInvoices();
-mongoose.connection.close();
+seedInvoices();

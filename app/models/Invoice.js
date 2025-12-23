@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const DataSchema = new mongoose.Schema(
     {
-        user_id:{type:mongoose.Schema.Types.ObjectId,required:true},
+        user_id:{type:mongoose.Schema.Types.ObjectId, ref:"users", required:true},
         payable:{type:String,required:true},
         cus_details:{type:String,required:true},
         ship_details:{type:String,required:true},
