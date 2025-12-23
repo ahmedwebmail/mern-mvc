@@ -1,54 +1,72 @@
-import mongoose, { startSession } from "mongoose";
-import { fa, faker } from "@faker-js/faker";
+import mongoose from "mongoose";
+import { faker } from "@faker-js/faker";
 import slugify from "slugify";
+
 import Category from "../app/models/Category.js";
 import Brand from "../app/models/Brand.js";
 import Product from "../app/models/Product.js";
-mongoose.connect("mongodb+srv://admin:admin@cluster0.nx8kf.mongodb.net/basarbazzar?retryWrites=true&w=majority", {
-
-})
-.then(() => console.log("MongoDB connected"))
-.catch(err => console.error(err));
 
 
-const brands = await Brand.find().select("_id name");
-    const brand_array = brands.map(brand => ({
-        id: brand._id,
-        name: brand.name
-    }));
+await mongoose.connect(
+  "mongodb+srv://admin:admin@cluster0.nx8kf.mongodb.net/basarbazzar?retryWrites=true&w=majority"
+);
 
-const categories = await Category.find().select("_id name");
-const category_array = categories.map(category => ({
-    id: category._id,
-    name: category.name
-}))
+console.log("✅ MongoDB connected");
+// console.log("✅ Product model loaded from:", import.meta.url);
+// delete mongoose.connection.models['products'];
 
-const title = faker.commerce.productName();
-const create_products= () => ({
-  title: title,  
-  slug: slugify(title, { lower: true }),
-  short_des: faker.commerce.productDescription(),
-  price: faker.commerce.price({ min: 1000, max: 100000, dec: 2 }),
-//   dicount: faker.number.int({ min: 0, max: 15 }),
-//   discount_price: faker.commerce.price({ min: 500, max: 1000, dec: 2 }),
-  img: faker.image.avatarGitHub(),
-  star: faker.number.int({ min: 1, max: 5 }),
-  remark: faker.lorem.sentence(),
-  stock: faker.number.int({ min: 0, max: 1000 }),
-  category_id: faker.helpers.arrayElement(category_array).id,
-  brand_id: faker.helpers.arrayElement(brand_array).id,
-});
+const categories = await Category.find().select("_id name").lean();
+const brands = await Brand.find().select("_id name").lean();
 
-const products = faker.helpers.multiple(create_products, {
-  count: 200,
-});
-
-try{
-    await Product.insertMany(products);
-    console.log("Products inserted successfully");
-}
-catch(err){
-    console.error("Error inserting products:", err);
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-mongoose.connection.close();
+const generateProducts = (numProducts) => {
+  const products = [];
+  for (let i = 0; i < numProducts; i++) {
+    const category = faker.helpers.arrayElement(categories);
+    const brand = faker.helpers.arrayElement(brands);
+    const title = faker.commerce.productName();
+    const slug = slugify(title, { lower: true });
+    const price = parseFloat(faker.commerce.price(1000, 100000, 2));
+    const is_discount = faker.datatype.boolean();
+    const discount = is_discount
+      ? faker.number.float({ min: 5, max: 30 })
+      : 0;
+    const discount_price = is_discount ? price - (price * discount / 100) : null;
+    products.push({
+      title,
+      slug,
+      short_des: faker.commerce.productDescription(),
+      price,
+      is_discount,
+      dicount: discount,
+      discount_price,
+      img: faker.image.url(),
+      star: getRandomInt(1, 5),
+      remark: faker.helpers.arrayElement(["Best Seller", "New Arrival", "Limited Edition"]),
+      in_stock: faker.datatype.boolean(),
+      stock: getRandomInt(0, 100),
+      category_id: category._id,
+      brand_id: brand._id
+    });
+  }
+  return products;
+}
+
+try {
+  const products = generateProducts(200);
+  await Product.insertMany(products);
+  console.log("Products seeded successfully");
+}
+
+catch (error) {
+  console.error("Seeding products failed:", error.toString());
+}
+finally {
+  mongoose.connection.close();
+  console.log(" MongoDB connection closed");
+}

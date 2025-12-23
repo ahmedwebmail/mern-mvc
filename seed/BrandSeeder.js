@@ -70,11 +70,11 @@ const seedBrands = async () => {
 
     process.exit();
   } catch (error) {
-    console.error("Seeding failed:", error);
+    console.error("Seeding failed:", error.toString());
     process.exit(1);
   }
 };
 
 seedBrands();
 
-mongoose.connection.close();
+// mongoose.connection.close();
