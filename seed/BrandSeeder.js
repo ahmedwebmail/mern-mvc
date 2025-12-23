@@ -76,3 +76,5 @@ const seedBrands = async () => {
 };
 
 seedBrands();
+
+mongoose.connection.close();
