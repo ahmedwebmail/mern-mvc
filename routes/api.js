@@ -42,7 +42,7 @@ import * as ForgetPasswordController from "../app/controllers/ForgetPasswordCont
  * - GET, POST, PUT, DELETE, PATCH
  * ---------------------------------------------------------------------
  */
-router.get("/brand-list", BrandController.index);
+router.get("/brand-list", BrandController.brandList);
 router.post("/add-brand", BrandController.create);
 router.get("/select-brand/:id", BrandController.show);
 router.put("/update-brand/:id", BrandController.update);
@@ -66,7 +66,7 @@ router.patch("/brand-soft-delete/:id", BrandController.softDelete);
  * Designed to support structured product classification.
  * ---------------------------------------------------------------------
  */
-router.get("/category-list", CategoryController.index);
+router.get("/category-list", CategoryController.categoryList);
 router.post("/add-category", CategoryController.create);
 router.get("/select-category/:id", CategoryController.view);
 router.put("/update-category/:id", CategoryController.update);
@@ -213,12 +213,13 @@ router.post("/add-to-cart", CartListController.create);
  *
  * ---------------------------------------------------------
  */
-router.post("/add-product", ProductController.create);
-router.get("/product-list", ProductController.index);
-router.get("/view-product/:id", ProductController.show);
-router.put("/update-product/:id", ProductController.update);
-router.delete("/remove-product/:id", ProductController.remove);
-router.patch("/product-soft-delete/:id", ProductController.softDelete);
+// router.post("/add-product", ProductController.create);
+// router.get("/product-list", ProductController.index);
+// router.get("/view-product/:id", ProductController.show);
+// router.put("/update-product/:id", ProductController.update);
+// router.delete("/remove-product/:id", ProductController.remove);
+// router.patch("/product-soft-delete/:id", ProductController.softDelete);
+router.get("/product-list-by-slider", ProductController.productListBySlider);
 // router.get('/product-by-category/:category_id', ProductController.getProductsByCategory);
 // router.get('/product-by-brand/:brand_id', ProductController.getProductsByBrand);
 // router.get('/product-by-review/:id', ProductController.getProductsByReview);
@@ -271,9 +272,9 @@ router.patch("/product-soft-delete/:id", ProductController.softDelete);
  * - Secure password hashing
  * ---------------------------------------------------------------------
  */
-router.post("/forget-password", ForgetPasswordController.forgetPassword);
-router.post("/verify-email", ForgetPasswordController.verifyEmail);
-router.post("/verify-otp", ForgetPasswordController.verifyOtp);
-router.put("/update-password", ForgetPasswordController.updatePassword);
+// router.post("/forget-password", ForgetPasswordController.forgetPassword);
+// router.post("/verify-email", ForgetPasswordController.verifyEmail);
+// router.post("/verify-otp", ForgetPasswordController.verifyOtp);
+// router.put("/update-password", ForgetPasswordController.updatePassword);
 
 export default router;

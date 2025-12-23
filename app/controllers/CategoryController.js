@@ -1,3 +1,5 @@
+import ProductService from "../services/ProductService.js";
+
 export const create = async (req, res) => {
     return res.json("Category created");
 }
@@ -14,8 +16,9 @@ export const remove = async (req, res) => {
     return res.json(`Removing category with ID`);
 }
 
-export const index = async (req, res) => {
-    return res.json("Listing all categories");
+export const categoryList = async (req, res) => {
+    let result = await ProductService.categoryListService();
+    return res.json(result);
 }
 
 export const softDelete = async (req, res) => {

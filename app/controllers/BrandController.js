@@ -1,5 +1,7 @@
+import ProductService from "../services/ProductService.js";
+
 export const create = async (req, res) => {
-    return res.json("Brand created");
+    return res.json(`Creating a new brand`);
 }
 
 export const show = async (req, res) => {
@@ -14,8 +16,9 @@ export const remove = async (req, res) => {
     return res.json(`Removing brand with ID`);
 }
 
-export const index = async (req, res) => {
-    return res.json("Listing all brands");
+export const brandList = async (req, res) => {
+    let result = await ProductService.brandListService();
+    return res.json(result);
 }
 
 export const softDelete = async (req, res) => {
