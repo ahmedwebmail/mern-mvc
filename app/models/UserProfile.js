@@ -41,7 +41,7 @@ const DataSchema = new mongoose.Schema({
         ship_state:{
             type:String
         },
-        userID:{type:mongoose.Schema.Types.ObjectId,required:true},
+        user_id:{type:mongoose.Schema.Types.ObjectId, ref:"users", required:true},
     },
     {
         timestamps: true,

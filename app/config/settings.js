@@ -20,7 +20,7 @@
  * -----------------------------------------------------
  * PORT            : Application listening port
  */
-export const PORT                       = 5000;
+export const PORT                       = 5050;
 
 /* -----------------------------------------------------
  * Database Configuration

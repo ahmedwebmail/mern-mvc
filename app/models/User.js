@@ -9,7 +9,7 @@ const DataSchema = new mongoose.Schema({
         },
         otp: {
             type: String,
-            required: true,
+            required: false,
         }
     },
     {

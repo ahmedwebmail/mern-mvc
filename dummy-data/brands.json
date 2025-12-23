@@ -1,0 +1,82 @@
+[
+  {
+    "brand_name": "Nike",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+  },
+  {
+    "brand_name": "Adidas",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+  },
+  {
+    "brand_name": "Puma",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Puma_logo.svg"
+  },
+  {
+    "brand_name": "Reebok",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/5/53/Reebok_2019_logo.svg"
+  },
+  {
+    "brand_name": "Under Armour",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/4/44/Under_armour_logo.svg"
+  },
+  {
+    "brand_name": "Apple",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+  },
+  {
+    "brand_name": "Samsung",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg"
+  },
+  {
+    "brand_name": "Sony",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg"
+  },
+  {
+    "brand_name": "LG",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_symbol.svg"
+  },
+  {
+    "brand_name": "Xiaomi",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg"
+  },
+  {
+    "brand_name": "Dell",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/1/18/Dell_logo_2016.svg"
+  },
+  {
+    "brand_name": "HP",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg"
+  },
+  {
+    "brand_name": "Lenovo",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg"
+  },
+  {
+    "brand_name": "Asus",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg"
+  },
+  {
+    "brand_name": "Acer",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg"
+  },
+  {
+    "brand_name": "Canon",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Canon_logo.svg"
+  },
+  {
+    "brand_name": "Nikon",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Nikon_Logo.svg"
+  },
+  {
+    "brand_name": "Rolex",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/en/0/0b/Rolex_logo.svg"
+  },
+  {
+    "brand_name": "Gucci",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/7/79/Gucci_Logo.svg"
+  },
+  {
+    "brand_name": "Louis Vuitton",
+    "brand_img": "https://upload.wikimedia.org/wikipedia/commons/9/92/Louis_Vuitton_logo.svg"
+  }
+]

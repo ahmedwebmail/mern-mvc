@@ -55,7 +55,6 @@ const DataSchema = new mongoose.Schema({
         title: {
             type: String,
             required: true,
-            unique: true,
         },
         
         slug: {
@@ -69,30 +68,43 @@ const DataSchema = new mongoose.Schema({
             type: Number,
             required: true, 
         },
+
+        is_discount: {
+            type: Boolean,
+            default: false,
+        },
+
         dicount:{
             type: Number,
-            null: true,
+            required: false,
         },
         discount_price: {
             type: Number,
-            null: true, 
+            required: false, 
         },
         img: {
             type: String,
-            null: true,
+            required: false,
         },
         star:{
             type: Number,
-            null: true,
+            required: false,
         },
         remark:{
             type: String,
-            null: true,
+            required: false,
         },
+
+        in_stock: {
+            type: Boolean,
+            default: false,
+        },
+
         stock: {
             type: Number,
-            required: true,
+            default: 0,
         },
+
         category_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "categories",
@@ -110,6 +122,12 @@ const DataSchema = new mongoose.Schema({
     }
 );
 
+if (mongoose.models.products) {
+    mongoose.deleteModel("products");
+}
+
 const ProductModel = mongoose.model("products", DataSchema);
+
+// const ProductModel = mongoose.models.products || mongoose.model('products', DataSchema);
 
 export default ProductModel;
