@@ -24,9 +24,10 @@ import ProductService from "../services/ProductService.js";
 //     return res.json(`Soft deleting brand with ID`);
 // }
 
-// const productListByBrand = async (req, res) => {
-//     return res.json(`Listing products for brand with ID`);
-// }
+export const productListByBrand = async (req, res) => {
+    let result = await ProductService.productListByBrandService(req.params.brand_id);
+    return res.json(result);
+}
 
 // const productListByCategory = async (req, res) => {
 //     return res.json(`Listing products for category with ID`);

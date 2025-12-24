@@ -17,12 +17,12 @@ import * as CategoryController from "../app/controllers/CategoryController.js";
 import * as BrandController from "../app/controllers/BrandController.js";
 import * as CartListController from "../app/controllers/CartListController.js";
 import * as ProductController from "../app/controllers/ProductController.js";
-import * as InvoiceController from "../app/controllers/InvoiceController.js";
-import * as WishListController from "../app/controllers/WishListController.js";
+// import * as InvoiceController from "../app/controllers/InvoiceController.js";
+// import * as WishListController from "../app/controllers/WishListController.js";
 import * as SignupController from "../app/controllers/SignupController.js";
 import * as SigninController from "../app/controllers/SigninController.js";
 import * as UserController from "../app/controllers/UserController.js";
-import * as ForgetPasswordController from "../app/controllers/ForgetPasswordController.js";
+// import * as ForgetPasswordController from "../app/controllers/ForgetPasswordController.js";
 
 /**
  * ---------------------------------------------------------------------
@@ -221,7 +221,7 @@ router.post("/add-to-cart", CartListController.create);
 // router.patch("/product-soft-delete/:id", ProductController.softDelete);
 router.get("/product-list-by-slider", ProductController.productListBySlider);
 // router.get('/product-by-category/:category_id', ProductController.getProductsByCategory);
-// router.get('/product-by-brand/:brand_id', ProductController.getProductsByBrand);
+router.get('/product-list-by-brand/:brand_id', ProductController.productListByBrand);
 // router.get('/product-by-review/:id', ProductController.getProductsByReview);
 // router.post("/create-product-review", ProductController.createProductReview);
 
