@@ -213,17 +213,12 @@ router.post("/add-to-cart", CartListController.create);
  *
  * ---------------------------------------------------------
  */
-// router.post("/add-product", ProductController.create);
-// router.get("/product-list", ProductController.index);
-// router.get("/view-product/:id", ProductController.show);
-// router.put("/update-product/:id", ProductController.update);
-// router.delete("/remove-product/:id", ProductController.remove);
-// router.patch("/product-soft-delete/:id", ProductController.softDelete);
 router.get("/product-list-by-slider", ProductController.productListBySlider);
 // router.get('/product-by-category/:category_id', ProductController.getProductsByCategory);
 router.get('/product-list-by-brand/:brand_id', ProductController.productListByBrand);
-// router.get('/product-by-review/:id', ProductController.getProductsByReview);
-// router.post("/create-product-review", ProductController.createProductReview);
+router.get('/product-list-by-keyword/:keyword', ProductController.productListBykeyword);
+// router.get('/product-list-by-review/:id', ProductController.getProductsByReview);
+router.get("/get-product-review/:product_id", ProductController.getProductsReviewListByID);
 
 /**
  * -------------------------------------------------------------

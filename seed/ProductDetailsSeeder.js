@@ -9,15 +9,12 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.nx8kf.mongodb.net/basarbazz
 .catch(err => console.error(err));
 
 
-const products = await Product.find().select("_id name");
-    const product_array = products.map(products => ({
-        id: products._id,
-        name: products.name
-    }));
+const product_list = await Product.find().select("_id name");
+    const product_array = product_list.map(products => ({
+    id: products._id,
+    name: products.name
+}));
 
-
-
-const title = faker.commerce.productName();
 const create_products= () => ({
   img1: "https://share.google/cBSm3bG5C590rcrOm",
   img2: "https://share.google/cBSm3bG5C590rcrOm",
@@ -26,7 +23,7 @@ const create_products= () => ({
   description: faker.commerce.productDescription(),
   color: faker.color.human(),
   size: faker.helpers.arrayElement(["S", "M", "L", "XL", "XXL"]),
-  product_id: faker.helpers.arrayElement(product_array).id,
+  product_id: faker.helpers.arrayElement(product_list)._id,
 });
 
 const product_details = faker.helpers.multiple(create_products, {
