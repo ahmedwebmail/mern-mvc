@@ -22,6 +22,7 @@ import * as ProductController from "../app/controllers/ProductController.js";
 import * as SignupController from "../app/controllers/SignupController.js";
 import * as SigninController from "../app/controllers/SigninController.js";
 import * as UserController from "../app/controllers/UserController.js";
+import AuthMiddleware from "../app/middlewares/AuthMiddleware.js";
 // import * as ForgetPasswordController from "../app/controllers/ForgetPasswordController.js";
 
 /**
@@ -108,9 +109,9 @@ router.post("/verify-login", SigninController.verifyLogin);
  * - These routes should be protected using authentication middleware.
  * ---------------------------------------------------------------------
  */
-router.get("/view-profile", UserController.viewProfile);
-router.put("/update-profile/:id", UserController.updateProfile);
-router.post("/create-profile", UserController.createProfile);
+router.get("/view-profile/", AuthMiddleware, UserController.viewProfile);
+router.put("/update-profile/:id", AuthMiddleware, UserController.updateProfile);
+router.post("/create-profile", AuthMiddleware, UserController.createProfile);
 
 /**
  * ---------------------------------------------------------
@@ -214,10 +215,8 @@ router.post("/add-to-cart", CartListController.create);
  * ---------------------------------------------------------
  */
 router.get("/product-list-by-slider", ProductController.productListBySlider);
-// router.get('/product-by-category/:category_id', ProductController.getProductsByCategory);
 router.get('/product-list-by-brand/:brand_id', ProductController.productListByBrand);
 router.get('/product-list-by-keyword/:keyword', ProductController.productListBykeyword);
-// router.get('/product-list-by-review/:id', ProductController.getProductsByReview);
 router.get("/get-product-review/:product_id", ProductController.getProductsReviewListByID);
 
 /**

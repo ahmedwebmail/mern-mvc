@@ -1,12 +1,17 @@
+import UserService from '../services/UserService.js'
+
 export const viewProfile = async (req, res) => {
-    res.json("User profile data");
+    let result = await viewProfileService(req)
+    return res.json(result)
 }
 
 export const createProfile = async (req, res) => {
-    res.json("User profile created");
+    let result = await UserService.createProfileService(req)
+    return res.json(result)
 }
 
 
 export const updateProfile = async (req, res) => {
-    res.json("User profile updated");
+    let result = await updateProfileService(req)
+    return res.json(result)
 }

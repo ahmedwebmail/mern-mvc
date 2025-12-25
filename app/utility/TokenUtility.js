@@ -1,5 +1,5 @@
 import { JWT_KEY, JWT_EXPIRE } from "../config/settings.js";
-
+import jwt from "jsonwebtoken";
 /**
  * ---------------------------------------------------------
  * Function: encodeToken

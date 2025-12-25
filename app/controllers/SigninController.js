@@ -1,19 +1,11 @@
+import LoginService from '../services/LoginService.js'
+
 export const signinUser = async (req, res) => {
-    
-    try {
-        return res.json("User signed in");
-    }
-    catch (error) {
-        return res.status(500).json({ status: 'Fail', 'Message':error.toString() });
-    }
+    let result = await LoginService.loginService(req)
+    return res.json(result)
 }
 
 export const verifyLogin = async (req, res) => {
-    
-    try {
-        return res.json("User signed in");
-    }
-    catch (error) {
-        return res.status(500).json({ status: 'Fail', 'Message':error.toString() });
-    }
+    let result = await LoginService.verifyLoginService(req)
+    return res.json(result)
 }

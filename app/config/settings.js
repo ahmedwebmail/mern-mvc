@@ -38,7 +38,7 @@ export const DB_CONNECTION              = 'mongodb+srv://admin:admin@cluster0.nx
  * JWT_EXPIRE_TIME : Token expiration time (in seconds)
  */
 export const JWT_KEY                    = '42f5e8c9-8b3a-4d2a-9f1e-3c6b7d9e2f1a';
-export const JWT_EXPIRE_TIME            = 30*24*60*60; 
+export const JWT_EXPIRE                 = 30*24*60*60; 
 
 
 /* -----------------------------------------------------
@@ -50,11 +50,11 @@ export const JWT_EXPIRE_TIME            = 30*24*60*60;
  * EMAIL_PASS : Email account password
  * EMAIL_FROM : Default sender email address
  */
-export const EMAIL_HOST = '';
-export const EMAIL_PORT = '';
-export const EMAIL_USER = '';
-export const EMAIL_PASS = '';
-export const EMAIL_FROM = '';
+export const EMAIL_HOST     = 'sandbox.smtp.mailtrap.io';
+export const EMAIL_PORT     = '2525';
+export const EMAIL_USER     = '167164c14351da';
+export const EMAIL_PASS     = 'a55e77324bea30';
+export const EMAIL_SECURITY =  'TLS'
 
 /* -----------------------------------------------------
  * Request & Performance Configuration
@@ -88,4 +88,4 @@ export const SUCCESS_URL    = "xx"
 export const FAIL_URL       = "xx"
 export const CURRENCY       = "GBP"
 export const CANCEL_URL     = "xx"
-export const INIT_URL       = ""
+export const INIT_URL       = "xx"
