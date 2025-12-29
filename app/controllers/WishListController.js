@@ -15,5 +15,6 @@ export const updateWishlist = async (req, res) => {
 }
 
 export const removeWishlist = async (req, res) => {
-    
+    let result  = WishListService.removeWishlistService(req)
+    return res.json(result)
 }
