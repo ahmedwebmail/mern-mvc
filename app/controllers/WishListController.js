@@ -6,7 +6,7 @@ export const getWishList = async (req, res) => {
 
 export const createWishList = async (req, res) => {
     let result  = WishListService.createWishListService(req)
-    // return res.json(result)
+    return res.json(result)
 }
 
 

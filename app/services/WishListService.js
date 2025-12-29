@@ -5,17 +5,15 @@ export const viewWishlistService = async (req, res) => {
 }
 
 export const createWishListService = async (req, res) => {
-    // console.log(req.body)
     try{
         let user_id = req.body.user_id
         let product_id = req.body.product_id
-        let data = await WishList.updateOne(
-            {$set:user_id},
-            {$set: product_id},
-            {upsert: true}
+        let data = await WishList.findOneAndUpdate(
+            { product_id, user_id },
+            { $set: { product_id, user_id } },
+            {upsert: true, new: true}
         )
-         console.log(data)
-        // return {status: "success", data: data, message: "Wishlist created"}
+        return res.json({status: "success", data: data, message: "Wishlist created"})
     }
 
     catch(e){
