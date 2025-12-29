@@ -24,26 +24,32 @@ const loginService = async (req, res) => {
 }
 
 const verifyLoginService = async (req, res) => {
+
     try{
         let {email, otp} = req.body
-        let total = await User.find(
+        let user = await User.find(
             {email: email},
             {otp: otp}
         )
 
-        if(total.length === 1){
+        if(user.length === 1){
             let user_id = await User.find(
                 {email: email},
                 {otp: otp}
             ).select("_id")
 
-            let token = encodeToken(email, user_id[0]['_id'].toString())
-            await User.updateOne(
+            let token = encodeToken(email, user_id._id)
+            console.log(token)
+            // let token = encodeToken(email, user_id[0]['_id'].toString())
+
+            if(token) {
+                await User.updateOne(
                 {email: email},
                 {$set:{otp: "0"}}
             )
 
-            return {status:"success", message:"OTP verified", token: token}
+                return {status:"success", message:"OTP verified", token: token}
+            }
         }
 
         else{

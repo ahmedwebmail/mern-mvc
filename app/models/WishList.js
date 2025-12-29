@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const DataSchema = new mongoose.Schema(
     {
-        productID:{type:mongoose.Schema.Types.ObjectId,required:true},
-        userID:{type:mongoose.Schema.Types.ObjectId,required:true},
+        product_id:{type:mongoose.Schema.Types.ObjectId, ref: "products", required:true},
+        user_id:{type:mongoose.Schema.Types.ObjectId, ref: "users", required:true},
     }
     ,
     {
@@ -15,4 +15,4 @@ const DataSchema = new mongoose.Schema(
 
 
 const WishListModel =mongoose.model('wish_lists',DataSchema);
-export default WishModel;
+export default WishListModel;

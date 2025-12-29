@@ -18,7 +18,7 @@ import * as BrandController from "../app/controllers/BrandController.js";
 import * as CartListController from "../app/controllers/CartListController.js";
 import * as ProductController from "../app/controllers/ProductController.js";
 // import * as InvoiceController from "../app/controllers/InvoiceController.js";
-// import * as WishListController from "../app/controllers/WishListController.js";
+import * as WishListController from "../app/controllers/WishListController.js";
 import * as SignupController from "../app/controllers/SignupController.js";
 import * as SigninController from "../app/controllers/SigninController.js";
 import * as UserController from "../app/controllers/UserController.js";
@@ -179,10 +179,10 @@ router.post("/add-to-cart", CartListController.create);
  * - DELETE /delete-wish-list/:id      → Delete a wishlist by ID
  * --------------------------------------------------------------------------
  */
-// router.get('/wish-list', WishListController.getWishList);
-// router.post('/create-wish-list', WishListController.createWishList);
-// router.put('/update-wish-list/:id', WishListController.updateWishList);
-// router.delete('/delete-wish-list/:id', WishListController.deleteWishList);
+router.get('/wish-list', WishListController.getWishList);
+router.post('/create-wish-list', WishListController.createWishList);
+router.put('/update-wish-list/:id', WishListController.updateWishlist);
+router.delete('/delete-wish-list/:id', WishListController.removeWishlist);
 
 /**
  * ---------------------------------------------------------
