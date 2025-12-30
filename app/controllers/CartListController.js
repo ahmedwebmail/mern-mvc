@@ -5,7 +5,6 @@ export const viewCart = async (req, res) => {
 }
 
 export const createCart = async (req, res) => {
-    // console.log(req.body)
     let result = await CartListService.createCartlistService(req)
     return res.json(result);
 }

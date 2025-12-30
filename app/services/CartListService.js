@@ -47,7 +47,7 @@ export const viewCartlistService = async (req, res) => {
 
 export const createCartlistService = async (req, res) => {
     try{
-        let user_id = req.body.user_id
+        let user_id = new object_id(req.headers['user_id'])
         let {product_id, color, qty, size} = req.body
 
        let params_to_create = {
