@@ -179,7 +179,7 @@ router.post("/add-to-cart", CartListController.create);
  * - DELETE /delete-wish-list/:id      → Delete a wishlist by ID
  * --------------------------------------------------------------------------
  */
-router.get('/wish-list', AuthMiddleware, WishListController.getWishList);
+router.get('/view-wish-list', AuthMiddleware, WishListController.getWishList);
 router.post('/create-wish-list', AuthMiddleware, WishListController.createWishList);
 router.put('/update-wish-list/:id', AuthMiddleware, WishListController.updateWishlist);
 router.delete('/delete-wish-list', AuthMiddleware, WishListController.removeWishlist);

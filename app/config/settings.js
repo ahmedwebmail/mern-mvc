@@ -38,7 +38,7 @@ export const DB_CONNECTION              = 'mongodb+srv://admin:admin@cluster0.nx
  * JWT_EXPIRE_TIME : Token expiration time (in seconds)
  */
 export const JWT_KEY                    = '42f5e8c9-8b3a-4d2a-9f1e-3c6b7d9e2f1a';
-export const JWT_EXPIRE                 = 30*24*60*60; 
+export const JWT_EXPIRE                 = 60*24*60*60; 
 
 
 /* -----------------------------------------------------

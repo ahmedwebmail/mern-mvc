@@ -33,21 +33,20 @@ const verifyLoginService = async (req, res) => {
         )
 
         if(user.length === 1){
-            let user_id = await User.find(
+            let user = await User.findOne(
                 {email: email},
                 {otp: otp}
             ).select("_id")
 
-            let token = encodeToken(email, user_id._id)
-            console.log(token)
+            let user_id = user._id.toString()
+            let token = encodeToken(email, user_id)
             // let token = encodeToken(email, user_id[0]['_id'].toString())
 
             if(token) {
                 await User.updateOne(
-                {email: email},
-                {$set:{otp: "0"}}
-            )
-
+                    {email: email},
+                    {$set:{otp: "0"}}
+                )
                 return {status:"success", message:"OTP verified", token: token}
             }
         }

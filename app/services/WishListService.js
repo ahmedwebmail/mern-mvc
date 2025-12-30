@@ -1,7 +1,28 @@
+import mongoose from 'mongoose';
 import WishList from '../models/WishList.js';
 
+const ObjectId = mongoose.Types.ObjectId
+
 export const viewWishlistService = async (req, res) => {
-    
+
+    try{
+        let user_id = new ObjectId(req.headers['user_id'])
+        let matchStage = {
+            $match:{
+                user_id: user_id
+            }
+        }
+
+        let data = await WishList.aggregate([
+            matchStage
+        ])
+
+        return res.json({status: "success", data: data})
+    }
+
+    catch(e){
+        return {status: "fail", message: "You have no wishlist", error: e.toString()}
+    }
 }
 
 export const createWishListService = async (req, res) => {
@@ -43,6 +64,7 @@ export const removeWishlistService = async (req, res) => {
 }
 
 export default{
+    viewWishlistService,
     createWishListService,
     removeWishlistService
 }
