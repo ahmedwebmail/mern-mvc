@@ -15,6 +15,6 @@ export const updateCart = async (req, res) => {
 }
 
 export const removeCart = async (req, res) => {
-    let result = await CartListService.createCartlistService(req)
+    let result = await CartListService.removeCartlistService(req)
     return res.json(result)
 }

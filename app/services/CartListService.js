@@ -76,17 +76,21 @@ export const updateCartlistService = async (req, res) => {
 
 export const removeCartlistService = async (req, res) => {
     try{
-        let user_id = new object_id(req.headers['user_id'])
-        let product_id = req.body.product_id
-        let data = await WishList.deleteOne(
-            { product_id, user_id },
-            { $set: { product_id, user_id } }
-        )
-        return res.json({status: "success", data: data, message: "Wishlist created"})
+        let decoded_data = decodeToken(req.headers.token)
+        let user_id = new object_id(decoded_data.user_id)
+        let id = req.body._id
+
+        let params = {
+            _id: id,
+            user_id: user_id
+        }
+
+        let data = await Cart.deleteOne(params)
+        return {status: "success", data: data, message: "Item removed from cart list"}
     }
 
     catch(e){
-        return {status: "fail", message: "You have no wishlist"}
+        return {status: "fail", message: "You have no cart list", error: e.toString()}
     }
 }
 
