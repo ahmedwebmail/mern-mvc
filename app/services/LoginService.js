@@ -24,7 +24,6 @@ const loginService = async (req, res) => {
 }
 
 const verifyLoginService = async (req, res) => {
-
     try{
         let {email, otp} = req.body
         let user = await User.find(
@@ -38,8 +37,7 @@ const verifyLoginService = async (req, res) => {
                 {otp: otp}
             ).select("_id")
 
-            let user_id = user._id.toString()
-            let token = encodeToken(email, user_id)
+            let token = encodeToken(email, user._id)
             // let token = encodeToken(email, user_id[0]['_id'].toString())
 
             if(token) {

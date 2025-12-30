@@ -149,7 +149,7 @@ router.post("/create-profile", AuthMiddleware, UserController.createProfile);
  */
 router.get("/view-cart", CartListController.viewCart);
 router.post("/add-to-cart", CartListController.createCart);
-router.patch("/view-cart", CartListController.updateCart);
+router.patch("/update-cart", CartListController.updateCart);
 router.delete("/remove-cart", CartListController.removeCart);
 
 /**
