@@ -1,23 +1,43 @@
 import mongoose from 'mongoose';
 import WishList from '../models/WishList.js';
 
-const ObjectId = mongoose.Types.ObjectId
+const object_id = mongoose.Types.ObjectId
 
 export const viewWishlistService = async (req, res) => {
 
     try{
-        let user_id = new ObjectId(req.headers['user_id'])
+        let user_id = new object_id(req.headers['user_id'])
         let matchStage = {
             $match:{
                 user_id: user_id
             }
         }
 
+        let JoinStageProduct = {
+            $lookup:{
+                from: "products",
+                localField: "product_id",
+                foreignField: "_id",
+                as: "product"
+            }
+        }
+
+        let JoinStageUser = {
+            $lookup:{
+                from: "users",
+                localField: "user_id",
+                foreignField: "_id",
+                as: "user"
+            }
+        }
+
         let data = await WishList.aggregate([
-            matchStage
+            matchStage,
+            JoinStageProduct,
+            JoinStageUser
         ])
 
-        return res.json({status: "success", data: data})
+        return {status: "success", data: data}
     }
 
     catch(e){
