@@ -1,23 +1,19 @@
-export const create = async (req, res) => {
-    return res.json("Brand created");
+import CartListService from "../services/CartListService.js";
+
+export const viewCart = async (req, res) => {
+    
 }
 
-export const show = async (req, res) => {
-    return res.json(`Viewing brand with ID`);
+export const createCart = async (req, res) => {
+    // console.log(req.body)
+    let result = await CartListService.createCartlistService(req)
+    return res.json(result);
 }
 
-export const update = async (req, res) => {
+export const updateCart = async (req, res) => {
     return res.json(`Updating brand with ID`);
 }
 
-export const remove = async (req, res) => {
+export const removeCart = async (req, res) => {
     return res.json(`Removing brand with ID`);
-}
-
-export const index = async (req, res) => {
-    return res.json("Listing all brands");
-}
-
-export const softDelete = async (req, res) => {
-    return res.json(`Soft deleting brand with ID`);
 }

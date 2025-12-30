@@ -147,11 +147,10 @@ router.post("/create-profile", AuthMiddleware, UserController.createProfile);
  * - Designed for modular expansion (e.g., coupons, checkout)
  * ---------------------------------------------------------
  */
-router.post("/add-to-cart", CartListController.create);
-// router.get("/cart-list", CartListController.car);
-// router.get("/view-cart/:id", CartListController.show);
-// router.put("/update-cart/:id", CartListController.update);
-// router.delete("/remove-cart/:id", CartListController.remove);
+router.get("/view-cart", CartListController.viewCart);
+router.post("/add-to-cart", CartListController.createCart);
+router.patch("/view-cart", CartListController.updateCart);
+router.delete("/remove-cart", CartListController.removeCart);
 
 /**
  * --------------------------------------------------------------------------
