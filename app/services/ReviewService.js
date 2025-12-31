@@ -80,15 +80,20 @@ const createProductReviewService = async(req, res) =>{
         let user_id = new object_id(decoded_data.user_id)
         let {product_id, description, rating} = req.body
 
+        let match_stage = {
+            user_id: user_id,
+            product_id: product_id
+        }
+
         let params = {
             user_id: user_id,
             product_id: product_id,
             description: description,
             rating: rating
         }
-
+        
         let review = await ProductReview.updateOne(
-            params,
+            match_stage,
             {$set: params},
             {upsert:true}
         )
