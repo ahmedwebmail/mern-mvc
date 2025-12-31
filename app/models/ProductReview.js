@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const DataSchema = new mongoose.Schema(
     {
-        user_profile_id:{type:mongoose.Schema.Types.ObjectId, ref:"user_profiles", required:true},
+        user_id:{type:mongoose.Schema.Types.ObjectId, ref:"user_profiles", required:true},
         product_id:{type:mongoose.Schema.Types.ObjectId, ref:"products" ,required:true},
         description:{type:String,required:true},
         rating:{type:Number,required:true, min: 0, max: 5},

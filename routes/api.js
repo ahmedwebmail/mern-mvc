@@ -22,6 +22,8 @@ import * as WishListController from "../app/controllers/WishListController.js";
 import * as SignupController from "../app/controllers/SignupController.js";
 import * as SigninController from "../app/controllers/SigninController.js";
 import * as UserController from "../app/controllers/UserController.js";
+import * as ProductReviewController from "../app/controllers/ProductReviewController.js";
+
 import AuthMiddleware from "../app/middlewares/AuthMiddleware.js";
 // import * as ForgetPasswordController from "../app/controllers/ForgetPasswordController.js";
 
@@ -151,6 +153,12 @@ router.get("/view-cart", CartListController.viewCart);
 router.post("/add-to-cart", CartListController.createCart);
 router.patch("/update-cart", CartListController.updateCart);
 router.delete("/remove-cart", CartListController.removeCart);
+
+
+//Review
+router.get("/get-all-reviews", AuthMiddleware, ProductReviewController.getAllReview);
+router.post("/create-review", AuthMiddleware, ProductReviewController.createReview);
+router.put("/update-review", AuthMiddleware, ProductReviewController.updateReview);
 
 /**
  * --------------------------------------------------------------------------
